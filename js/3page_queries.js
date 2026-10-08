@@ -32,7 +32,7 @@ async function cargarEquipos() {
             <td>${equipo.Nombre ?? ""}</td>
             <td>${equipo.Descripcion ?? ""}</td>
 
-            <td>${equipo.idMarcas ?? ""}</td>
+            
             <td>${equipo.marcas?.Marca ?? ""}</td>
 
             <td>${equipo.Modelo ?? ""}</td>
@@ -40,7 +40,7 @@ async function cargarEquipos() {
             <td>${equipo.NumeroSerie ?? ""}</td>
             <td>${equipo.FechaRegistro ?? ""}</td>
 
-            <td>${equipo.idEstado ?? ""}</td>
+            
             <td>${equipo.estado_equipo?.Estado ?? ""}</td>
 
             <td>${equipo.Responsable ?? ""}</td>

@@ -57,3 +57,44 @@ header {
     text-decoration: underline;
     text-underline-offset: 4px;
 }
+
+main {
+    background-color: rgba(216, 144, 206, 0);
+    margin: 0 auto;
+    width: min(100%, 98rem);
+    padding: 1rem;
+}
+
+table {
+    background-color: rgba(0, 139, 139, 0);
+    width: 100%;
+    min-width: 70rem;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 70%;
+}
+
+th, td {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #000000;
+    vertical-align: top;
+}
+
+th {
+    background-color: var(--color-secundario);
+    color: var(--color-texto);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+td {
+    color: var(--color-oscuro);
+    font-size: 0.875rem;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}

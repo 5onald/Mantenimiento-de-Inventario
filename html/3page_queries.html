@@ -24,34 +24,38 @@
         </nav>
     </header>
     <main>
-        <h2>Equipos</h2>
-        <p id="mensaje"></p>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID Equipo</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>ID Marca</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Código Activo</th>
-                    <th>Número de Serie</th>
-                    <th>Fecha de Registro</th>
-                    <th>ID Estado</th>
-                    <th>Estado</th>
-                    <th>Responsable</th>
-                    <th>Fecha de Compra</th>
-                    <th>Ubicación</th>
-                    <th>Observaciones</th>
-                    <th>Activo</th>
-                </tr>
-            </thead>
-            <tbody id="tablaEquipos"></tbody>
-        </table>
+        <section>
+            <div>
+                <h2>Equipos</h2>
+                <p id="mensaje"></p>
+            </div>
+        </section>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Código Activo</th>
+                        <th>Número de Serie</th>
+                        <th>Fecha de Registro</th>
+                        <th>Estado</th>
+                        <th>Responsable</th>
+                        <th>Fecha de Compra</th>
+                        <th>Ubicación</th>
+                        <th>Observaciones</th>
+                        <th>Activo</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaEquipos"></tbody>
+            </table>
+        </div>
     </main>
-    <script type="module" src="../js/3page_queries.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase.js"></script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/3page_queries.js"></script>
 </html>
