@@ -6,7 +6,7 @@ document.getElementById('login-form').onsubmit = function (e) {
 
     if (usuario === 'Alejandro' && password === 'Huq73627') {
         localStorage.setItem('logueando', 'si');
-        location.href = '../html/index.html';
+        location.href = '../html/pag_admin.html';
     } else {
         mensaje.textContent = 'Usuario o contraseña incorrecta';
     }
