@@ -13,5 +13,5 @@ document.getElementById('login-form').onsubmit = function (e) {
 }
 
 document.getElementById('button-next-section').onclick = function () {
-    location.href = '../html/index.html'
+    location.href = '../html/page_homepage.html'
 }
