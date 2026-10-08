@@ -29,15 +29,29 @@
         <table>
             <thead>
                 <tr>
+                    <th>ID Equipo</th>
                     <th>Nombre</th>
-                    <th>Código Activo</th>
+                    <th>Descripción</th>
+                    <th>ID Marca</th>
                     <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Código Activo</th>
+                    <th>Número de Serie</th>
+                    <th>Fecha de Registro</th>
+                    <th>ID Estado</th>
                     <th>Estado</th>
+                    <th>Responsable</th>
+                    <th>Fecha de Compra</th>
+                    <th>Ubicación</th>
+                    <th>Observaciones</th>
+                    <th>Activo</th>
                 </tr>
             </thead>
-            <tbody id="equipos"></tbody>
+            <tbody id="tablaEquipos"></tbody>
         </table>
     </main>
     <script type="module" src="../js/3page_queries.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
 </body>
 </html>
