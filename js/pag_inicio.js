@@ -4,7 +4,7 @@ document.getElementById('login-form').onsubmit = function (e) {
     var password = document.getElementById('password').value;
     var mensaje = document.getElementById('mensaje-error');
 
-    if (usuario === 'Alejandro' && password === 'Huq73627') {
+    if (usuario === 'alejandrosolanor' && password === 'Huq73627') {
         localStorage.setItem('logueando', 'si');
         location.href = '../html/pag_admin.html';
     } else {
