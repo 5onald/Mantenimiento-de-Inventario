@@ -6,12 +6,12 @@ document.getElementById('login-form').onsubmit = function (e) {
 
     if (usuario === 'alejandrosolanor' && password === 'Huq73627') {
         localStorage.setItem('logueando', 'si');
-        location.href = '../html/pag_admin.html';
+        location.href = '../html/4pag_admin.html';
     } else {
         mensaje.textContent = 'Usuario o contraseña incorrecta';
     }
 }
 
 document.getElementById('button-next-section').onclick = function () {
-    location.href = '../html/page_homepage.html'
+    location.href = '../html/2page_homepage.html'
 }
