@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiTech Global | Login</title>
+    <link rel="stylesheet" href="../css/pag_inicio.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <section id="login-section">
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQofHGc-AoTZYq6OcmCA5fTwkwD4VbQBgIpzlpLG5i963e5JmWjZwBJXR4&s=10" alt="Puerto Caldera">
+            </div>
+            <div>
+                <h1>Iniciar sesión</h1>
+                <form id="login-form">
+                    <label for="usuario">Usuario</label>
+                    <input id="usuario" type="text" placeholder="Escribe tu usuario" autocomplete="username" required>
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" placeholder="Escribe tu contraseña" autocomplete="current-password" required>
+                    <button type="submit">Autenticarse</button>
+                </form>
+                <p id="mensaje-error"></p>
+            </div>
+        </section>
+        <section id="next-section">
+            <div>
+                <h2>¿No eres administrador? Ingresa por aquí.</h2>
+                <button id="button-next-section" type="button">Ingresar</button>
+            </div>
+        </section>
+    </main>
+    <script src="../js/pag_inicio.js"></script>
+</body>
+</html>
