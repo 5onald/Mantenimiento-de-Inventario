@@ -32,7 +32,6 @@ async function cargarEquipos() {
             <td>${equipo.Nombre ?? ""}</td>
             <td>${equipo.Descripcion ?? ""}</td>
 
-            
             <td>${equipo.marcas?.Marca ?? ""}</td>
 
             <td>${equipo.Modelo ?? ""}</td>
@@ -55,3 +54,17 @@ async function cargarEquipos() {
 }
 
 cargarEquipos();
+
+supabaseClient
+    .channel("equipos-cambios")
+    .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "equipos" },
+        () => cargarEquipos()
+    )
+    .subscribe((status, error) => {
+        if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+            console.error("Error en la suscripción en tiempo real:", error ?? status);
+        }
+    }
+);
