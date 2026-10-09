@@ -59,19 +59,70 @@ header {
 }
 
 main {
-    background-color: rgba(216, 144, 206, 0);
     margin: 0 auto;
     width: min(100%, 98rem);
     padding: 1rem;
 }
 
+.controles-consulta {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding-bottom: 0.6rem;
+}
+
+.campo-filtro {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 21rem;
+    padding-top: 0.1rem;
+}
+
+.campo-filtro label {
+    font-size: 0.85rem;
+    font-weight: 600;
+
+}
+
+.campo-filtro input, .campo-filtro select, .controles-consulta button {
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #6b7280;
+    border-radius: 0.35rem;
+    background-color: #fff;
+    color: var(--color-oscuro);
+    font: inherit;
+}
+
+.campo-filtro input {
+    min-width: min(22rem, 100%);
+}
+
+.controles-consulta button {
+    background-color: var(--color-secundario);
+    color: var(--color-texto);
+    cursor: pointer;
+}
+
+.controles-consulta button:hover, .controles-consulta button:focus-visible {
+    background-color: var(--color-acento);
+}
+
+#mensaje {
+    min-height: 1.5rem;
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+}
+
 table {
-    background-color: rgba(0, 139, 139, 0);
+    background-color: rgb(255, 255, 255);
     width: 100%;
     min-width: 70rem;
     border-collapse: collapse;
     text-align: center;
-    font-size: 70%;
+    font-size: 68%;
 }
 
 th, td {
@@ -92,7 +143,7 @@ th {
 
 td {
     color: var(--color-oscuro);
-    font-size: 0.875rem;
+    font-size: 0.65rem;
 }
 
 tbody tr:nth-child(even) {

@@ -1,59 +1,165 @@
-async function cargarEquipos() {
+const tablaEquipos = document.getElementById("tablaEquipos");
+const mensaje = document.getElementById("mensaje");
+const buscarEquipo = document.getElementById("buscarEquipo");
+const filtroMarca = document.getElementById("filtroMarca");
+const filtroEstado = document.getElementById("filtroEstado");
+const equipos = [];
 
+function normalizarTexto(valor) {
+    return String(valor ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLocaleLowerCase();
+}
+
+function crearCelda(fila, valor) {
+    const celda = document.createElement("td");
+    celda.textContent = String(valor ?? "");
+    fila.appendChild(celda);
+}
+
+function mostrarEquipos() {
+    const busqueda = normalizarTexto(buscarEquipo.value.trim());
+    const marcaSeleccionada = filtroMarca.value;
+    const estadoSeleccionado = filtroEstado.value;
+    const resultados = equipos.filter(equipo => {
+        const coincideMarca = !marcaSeleccionada
+            || String(equipo.marcas?.idMarcas ?? "") === marcaSeleccionada;
+        const coincideEstado = !estadoSeleccionado
+            || String(equipo.estado_equipo?.idEstado ?? "") === estadoSeleccionado;
+        const textoEquipo = [
+            equipo.idEquipo,
+            equipo.Nombre,
+            equipo.Descripcion,
+            equipo.marcas?.Marca,
+            equipo.Modelo,
+            equipo.CodigoActivo,
+            equipo.NumeroSerie,
+            equipo.FechaRegistro,
+            equipo.estado_equipo?.Estado,
+            equipo.Responsable,
+            equipo.FechaCompra,
+            equipo.Ubicacion,
+            equipo.Observaciones,
+            equipo.Activo ? "Sí" : "No"
+        ].map(normalizarTexto).join(" ");
+
+        return coincideMarca && coincideEstado && textoEquipo.includes(busqueda);
+    });
+
+    tablaEquipos.replaceChildren();
+
+    resultados.forEach(equipo => {
+        const fila = document.createElement("tr");
+        [
+            equipo.idEquipo,
+            equipo.Nombre,
+            equipo.Descripcion,
+            equipo.marcas?.Marca,
+            equipo.Modelo,
+            equipo.CodigoActivo,
+            equipo.NumeroSerie,
+            equipo.FechaRegistro,
+            equipo.estado_equipo?.Estado,
+            equipo.Responsable,
+            equipo.FechaCompra,
+            equipo.Ubicacion,
+            equipo.Observaciones,
+            equipo.Activo ? "Sí" : "No"
+        ].forEach(valor => crearCelda(fila, valor));
+        tablaEquipos.appendChild(fila);
+    });
+
+    mensaje.textContent = resultados.length
+        ? `Mostrando ${resultados.length} de ${equipos.length} equipos.`
+        : "No se encontraron equipos con esos criterios.";
+}
+
+function cargarOpciones(select, opciones, idCampo, textoCampo) {
+    opciones.forEach(opcion => {
+        const elemento = document.createElement("option");
+        elemento.value = String(opcion[idCampo]);
+        elemento.textContent = opcion[textoCampo] ?? "";
+        select.appendChild(elemento);
+    });
+}
+
+async function cargarEquipos() {
     const { data, error } = await supabaseClient
         .from("equipos")
         .select(`
             *,
             marcas (
+                idMarcas,
                 Marca
             ),
             estado_equipo (
+                idEstado,
                 Estado
             )
         `);
 
     if (error) {
         console.error("Error al obtener los equipos:", error);
-        return;
+        mensaje.textContent = "No fue posible cargar los equipos. Intenta de nuevo más tarde.";
+        return "los equipos";
     }
 
-    console.log(data);
-
-    const tabla = document.getElementById("tablaEquipos");
-
-    tabla.innerHTML = "";
-
-    data.forEach(equipo => {
-
-        const fila = document.createElement("tr");
-
-        fila.innerHTML = `
-            <td>${equipo.idEquipo}</td>
-            <td>${equipo.Nombre ?? ""}</td>
-            <td>${equipo.Descripcion ?? ""}</td>
-
-            <td>${equipo.marcas?.Marca ?? ""}</td>
-
-            <td>${equipo.Modelo ?? ""}</td>
-            <td>${equipo.CodigoActivo ?? ""}</td>
-            <td>${equipo.NumeroSerie ?? ""}</td>
-            <td>${equipo.FechaRegistro ?? ""}</td>
-
-            
-            <td>${equipo.estado_equipo?.Estado ?? ""}</td>
-
-            <td>${equipo.Responsable ?? ""}</td>
-            <td>${equipo.FechaCompra ?? ""}</td>
-            <td>${equipo.Ubicacion ?? ""}</td>
-            <td>${equipo.Observaciones ?? ""}</td>
-            <td>${equipo.Activo ? "Sí" : "No"}</td>
-        `;
-
-        tabla.appendChild(fila);
-    });
+    equipos.splice(0, equipos.length, ...data);
+    mostrarEquipos();
+    return null;
 }
 
-cargarEquipos();
+async function cargarFiltros() {
+    const [marcasResultado, estadosResultado] = await Promise.all([
+        supabaseClient.from("marcas").select("idMarcas, Marca").order("Marca"),
+        supabaseClient.from("estado_equipo").select("idEstado, Estado").order("Estado")
+    ]);
+    const errores = [];
+
+    if (marcasResultado.error) {
+        console.error("Error al obtener las marcas:", marcasResultado.error);
+        errores.push("las marcas");
+    } else {
+        cargarOpciones(filtroMarca, marcasResultado.data, "idMarcas", "Marca");
+    }
+
+    if (estadosResultado.error) {
+        console.error("Error al obtener los estados:", estadosResultado.error);
+        errores.push("los estados");
+    } else {
+        cargarOpciones(filtroEstado, estadosResultado.data, "idEstado", "Estado");
+    }
+
+    return errores;
+}
+
+buscarEquipo.addEventListener("input", mostrarEquipos);
+filtroMarca.addEventListener("change", mostrarEquipos);
+filtroEstado.addEventListener("change", mostrarEquipos);
+document.getElementById("limpiarFiltros").addEventListener("click", () => {
+    buscarEquipo.value = "";
+    filtroMarca.value = "";
+    filtroEstado.value = "";
+    mostrarEquipos();
+});
+
+async function iniciarConsulta() {
+    const [erroresFiltros, errorEquipos] = await Promise.all([
+        cargarFiltros(),
+        cargarEquipos()
+    ]);
+    const errores = [...erroresFiltros];
+    if (errorEquipos) {
+        errores.push(errorEquipos);
+    }
+
+    if (errores.length) {
+        mensaje.textContent = `No fue posible cargar ${errores.join(" ni ")}. Intenta de nuevo más tarde.`;
+    }
+}
+
+iniciarConsulta();
 
 supabaseClient
     .channel("equipos-cambios")

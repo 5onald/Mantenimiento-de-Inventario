@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,9 +27,28 @@
         <section>
             <div>
                 <h2>Equipos</h2>
-                <p id="mensaje"></p>
             </div>
         </section>
+        <section class="controles-consulta" aria-label="Consultar equipos">
+            <div class="campo-filtro">
+                <label for="buscarEquipo">Buscar</label>
+                <input id="buscarEquipo" type="search" placeholder="Nombre, modelo, serie, responsable" autocomplete="off">
+            </div>
+            <div class="campo-filtro">
+                <label for="filtroMarca">Filtrar por marca</label>
+                <select id="filtroMarca">
+                    <option value="">Todas las marcas</option>
+                </select>
+            </div>
+            <div class="campo-filtro">
+                <label for="filtroEstado">Filtrar por estado</label>
+                <select id="filtroEstado">
+                    <option value="">Todos los estados</option>
+                </select>
+            </div>
+            <button id="limpiarFiltros" type="button">Limpiar filtros</button>
+        </section>
+        <p id="mensaje" role="status" aria-live="polite"></p>
         <div>
             <table>
                 <thead>
