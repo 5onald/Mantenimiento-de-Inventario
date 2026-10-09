@@ -16,14 +16,142 @@
                 <h1>Panel de Administración | LogiTech Global</h1>  
             </div>
             <div class="nav-right">
-                <a href="../html/1page_login.html" class="functions1">Cerrar sesión</a>
+                <a id="cerrarSesion" href="../html/1page_login.html" class="functions1">Cerrar sesión</a>
             </div>
         </nav>
     </header>
     <main id="main">
-        
+        <section>
+            <h2>Administrar equipos</h2>
+            <p>Equipos registrados en el inventario.</p>
+        </section>
+        <section class="controles-consulta" aria-label="Buscar y filtrar equipos">
+            <div class="campo-filtro">
+                <label for="buscarEquipo">Buscar equipo</label>
+                <input
+                    id="buscarEquipo"
+                    type="search"
+                    placeholder="Nombre, modelo, serie, responsable..."
+                    autocomplete="off"
+                >
+            </div>
+            <div class="campo-filtro">
+                <label for="filtroMarca">Filtrar por marca</label>
+                <select id="filtroMarca">
+                    <option value="">Todas las marcas</option>
+                </select>
+            </div>
+            <div class="campo-filtro">
+                <label for="filtroEstado">Filtrar por estado</label>
+                <select id="filtroEstado">
+                    <option value="">Todos los estados</option>
+                </select>
+            </div>
+            <button id="limpiarFiltros" type="button">Limpiar filtros</button>
+            <button id="crearEquipo" type="button">Agregar equipo</button>
+        </section>
+        <p id="mensaje" role="status" aria-live="polite"></p>
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Código Activo</th>
+                        <th>Número de Serie</th>
+                        <th>Fecha de Registro</th>
+                        <th>Estado</th>
+                        <th>Responsable</th>
+                        <th>Fecha de Compra</th>
+                        <th>Ubicación</th>
+                        <th>Observaciones</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaEquipos"></tbody>
+            </table>
+        </div>
     </main>
+    <dialog id="dialogoEquipo" aria-labelledby="tituloDialogo">
+        <form id="formularioEquipo">
+            <div class="dialogo-encabezado">
+                <h2 id="tituloDialogo">Agregar equipo</h2>
+                <button id="cerrarDialogo" class="boton-cerrar" type="button" aria-label="Cerrar">×</button>
+            </div>
+            <div class="formulario-equipo">
+                <div class="campo-formulario">
+                    <label for="nombre">Nombre *</label>
+                    <input id="nombre" name="Nombre" type="text" maxlength="150" required>
+                </div>
+                <div class="campo-formulario">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="Descripcion" rows="2"></textarea>
+                </div>
+                <div class="campo-formulario">
+                    <label for="marca">Marca</label>
+                    <select id="marca" name="idMarcas">
+                        <option value="">Sin marca</option>
+                    </select>
+                </div>
+                <div class="campo-formulario">
+                    <label for="modelo">Modelo</label>
+                    <input id="modelo" name="Modelo" type="text">
+                </div>
+                <div class="campo-formulario">
+                    <label for="codigoActivo">Código Activo</label>
+                    <input id="codigoActivo" name="CodigoActivo" type="text">
+                </div>
+                <div class="campo-formulario">
+                    <label for="numeroSerie">Número de Serie</label>
+                    <input id="numeroSerie" name="NumeroSerie" type="text">
+                </div>
+                <div class="campo-formulario">
+                    <label for="fechaRegistro">Fecha de Registro</label>
+                    <input id="fechaRegistro" name="FechaRegistro" type="date">
+                </div>
+                <div class="campo-formulario">
+                    <label for="estado">Estado</label>
+                    <select id="estado" name="idEstado">
+                        <option value="">Sin estado</option>
+                    </select>
+                </div>
+                <div class="campo-formulario">
+                    <label for="responsable">Responsable</label>
+                    <input id="responsable" name="Responsable" type="text">
+                </div>
+                <div class="campo-formulario">
+                    <label for="fechaCompra">Fecha de Compra</label>
+                    <input id="fechaCompra" name="FechaCompra" type="date">
+                </div>
+                <div class="campo-formulario">
+                    <label for="ubicacion">Ubicación</label>
+                    <input id="ubicacion" name="Ubicacion" type="text">
+                </div>
+                <div class="campo-formulario">
+                    <label for="observaciones">Observaciones</label>
+                    <textarea id="observaciones" name="Observaciones" rows="2"></textarea>
+                </div>
+                <div class="campo-formulario">
+                    <label for="activo">Activo</label>
+                    <select id="activo" name="Activo">
+                        <option value="true">Sí</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+            <p id="mensajeFormulario" role="alert" aria-live="assertive"></p>
+            <div class="acciones-formulario">
+                <button id="cancelarEquipo" type="button">Cancelar</button>
+                <button id="guardarEquipo" type="submit">Guardar equipo</button>
+            </div>
+        </form>
+    </dialog>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase.js"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/4page_admin.js"></script>
 </body>
 </html>

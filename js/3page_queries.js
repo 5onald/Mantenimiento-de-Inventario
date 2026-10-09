@@ -97,7 +97,8 @@ async function cargarEquipos() {
                 idEstado,
                 Estado
             )
-        `);
+        `)
+        .order("idEquipo", { ascending: true });
 
     if (error) {
         console.error("Error al obtener los equipos:", error);

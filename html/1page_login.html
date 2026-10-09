@@ -18,8 +18,8 @@
             <div>
                 <h1>Iniciar sesión</h1>
                 <form id="login-form">
-                    <label for="usuario">Usuario</label>
-                    <input id="usuario" type="text" placeholder="Escribe tu usuario" autocomplete="username" required>
+                    <label for="email">Correo electrónico</label>
+                    <input id="email" type="email" placeholder="Escribe tu correo electrónico" autocomplete="username" required>
                     <label for="password">Contraseña</label>
                     <input id="password" type="password" placeholder="Escribe tu contraseña" autocomplete="current-password" required>
                     <button type="submit">Autenticarse</button>
@@ -34,6 +34,8 @@
             </div>
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
     <script src="../js/1pag_login.js"></script>
 </body>
 </html>

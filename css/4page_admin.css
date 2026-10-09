@@ -1,59 +1,129 @@
+@import url("3page_queries.css");
+
 * {
     box-sizing: border-box;
 }
 
-:root {
-    --color-fondo: #9CA3AF;
-    --color-secundario: #1F2937;
-    --color-acento: #4B5563;
-    --color-oscuro: #111827;
-    --color-texto: #EDEDED;
-    --color-fondo-secundario: #f0eae0;
-}
-
-body {
-    min-height: 100vh;
-    margin: 0;
-    color: var(--color-oscuro);
-    background-color: var(--color-fondo-secundario);
-    font-family: "Plus Jakarta Sans", Arial, sans-serif;
-}
-
-header {
-    padding: 1rem 2rem;
-    background-color: var(--color-oscuro);
-    color: var(--color-texto);
-}
-
-#menu-nav {
-    max-width: 85rem;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.nav-right {
+    width: auto;
     gap: 1.5rem;
 }
 
-.nav-left h1 {
-    margin: 0;
-    font-size: 1.2rem;
+.controles-consulta button#crearEquipo, .acciones-formulario button[type="submit"] {
+    background-color: #166534;
+    color: #fff;
+}
+
+.controles-consulta button#crearEquipo:hover, .acciones-formulario button[type="submit"]:hover {
+    background-color: #14532d;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+.acciones-tabla {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 8rem;
+}
+
+.acciones-tabla button, .acciones-formulario button, .boton-cerrar {
+    min-height: 2rem;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid #6b7280;
+    border-radius: 0.35rem;
+    background-color: var(--color-secundario);
+    color: var(--color-texto);
+    font: inherit;
+    cursor: pointer;
+}
+
+.acciones-tabla button:hover, .acciones-tabla button:focus-visible, .acciones-formulario button:hover, .acciones-formulario button:focus-visible {
+    background-color: var(--color-acento);
+}
+
+.acciones-tabla .boton-eliminar {
+    background-color: #991b1b;
+}
+
+.acciones-tabla .boton-eliminar:hover, .acciones-tabla .boton-eliminar:focus-visible {
+    background-color: #7f1d1d;
+}
+
+#dialogoEquipo {
+    width: min(48rem, calc(100% - 2rem));
+    max-height: calc(100% - 2rem);
+    padding: 1.25rem;
+    border: 1px solid #9ca3af;
+    border-radius: 0.6rem;
+    color: var(--color-oscuro);
+    background-color: var(--color-fondo-secundario);
+}
+
+#dialogoEquipo::backdrop {
+    background-color: rgb(17 24 39 / 65%);
+}
+
+.dialogo-encabezado, .acciones-formulario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dialogo-encabezado h2 {
+    margin: 0 0 1rem;
+}
+
+.boton-cerrar {
+    min-width: 2rem;
+    margin-bottom: 1rem;
+    padding: 0;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.formulario-equipo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem 1rem;
+}
+
+.campo-formulario {
+    display: grid;
+    gap: 0.3rem;
+}
+
+.campo-formulario label {
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
-.nav-right {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7.1rem;
-    width: 8rem;
+.campo-formulario input, .campo-formulario select, .campo-formulario textarea {
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid #6b7280;
+    border-radius: 0.35rem;
+    background-color: #fff;
+    color: var(--color-oscuro);
+    font: inherit;
 }
 
-.nav-right a {
-    color: var(--color-fondo);
-    text-decoration: none;
+.campo-formulario textarea {
+    resize: vertical;
 }
 
-.nav-right a:hover, .nav-right a:focus-visible {
-    color: #fff;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+.acciones-formulario {
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+#mensajeFormulario {
+    min-height: 1.25rem;
+    margin: 0.75rem 0 0;
+    color: #991b1b;
+    font-size: 0.9rem;
 }
