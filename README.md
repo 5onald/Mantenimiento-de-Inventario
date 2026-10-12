@@ -6,19 +6,23 @@ Para poder desarrollar el proyecto, es necesario destacar las herramientas que s
 
 Primero, es importante contar con este editor de código, el cual nos permitirá trabajar de manera gratuita. [Visual Studio Code](https://code.visualstudio.com/)
 
-Segundo, se debe de tener un lugar que sea adecuado para el guardado de el proyecto; es decir, un repositorio. Asimismo, esta herramienta también permita que subir los cambios que se van desarrollando a lo largo del proyecto. [Github](https://github.com/5onald/Mantenimiento-de-Inventario)
+Segundo, se debe de tener un lugar que sea adecuado para el guardado de el proyecto; es decir, un repositorio. Asimismo, esta herramienta también permitirá que subir los cambios que se van desarrollando a lo largo del proyecto. [Github](https://github.com/5onald/Mantenimiento-de-Inventario)
 
 Tercero, pero no menos importante, se debe de tener en cuenta una base de datos para poder guardar todos los registros. Así como también para realizar consultas, crear o actualizar datos, y también poder eliminarlos. [Supabase](https://supabase.com/dashboard/project/kprmjuplxnyrszualoce)
 
 ## OBJETIVO
-    Un encargado de tecnología desea una aplicación pequeña funcional, esto con el objeto de registrar, consultar, modificar e inactivar equipos tecnológicos. Asimismo, esto permite al encargado de mantener actualizado el inventario, esto a partir de equipos que existen, sus características, su ubicación, responsable y estado actual.
+~~~
+Un encargado de tecnología desea una aplicación pequeña funcional, esto con el objeto de registrar, consultar, modificar e inactivar equipos tecnológicos. Asimismo, esto permite al encargado de mantener actualizado el inventario, esto a partir de equipos que existen, sus características, su ubicación, responsable y estado actual.
+~~~
+
+<br>
 
 ---
 
-## ETAPA 1
-En esta etapa, se desarrollará primero la base de datos y las tablas, las cuales serán esensiales para la aplicación del encargado.
-
 <br>
+
+## ETAPA I - BASE DE DATOS
+En esta etapa, se desarrollará primero la base de datos y las tablas, las cuales serán esensiales para la aplicación del encargado.
 
     Tabla: marcas
 ~~~
@@ -69,8 +73,130 @@ create table public.equipos (
 ~~~
 <br>
 
-No obstante, ahora se p
+No obstante, se creó un usuario para el sistema de autenticación; es decir, que solamente el encargado de tecnología podrá ingresar como administrador en la aplicación. Asimismo, el sistema ya tendrá guardado que este usuario admin podrá insertar, leer, actualizar y eliminar todos los datos de todas las tables a partir de las políticas RLS (Row-Level Security policies).
+
+Sin embargo, para ingresar como administador, se necesita:
+
+    Correo electrónico: alejandrosolanor@gmail.com
+
+    Contraseña: Huq73627?
+<br>
 
 ---
 
-## ETAPA 2
+<br>
+
+## ETAPA II - DESARROLLO DE LA APLICACIÓN
+
+<br>
+
+---
+
+<br>
+
+## ETAPA III - DEMOSTRACIÓN FUNCIONAL
+Ahora, para esta etapa del proyecto, es necesario poner a prueba la funcionalidad de la aplicación. ¿Cómo? Poner casos de prueba para la revisión de esta misma.
+
+| Caso | Prueba | Resultado esperado |
+| --- | --- | --- |
+| 1 | Crear el activo PC-001 | El registro se guarda correctamente.
+| 2 | Intentar crear nuevamente PC-001 | El sistema bloquea el duplicado y muestra un mensaje.
+| 3 | Guardar un equipo sin nombre | El sistema valida el campo obligatorio.
+| 4 | Modificar el responsable | El cambio queda persistido.
+| 5 | Inactivar un equipo | El registro permanece, pero aparece como inactivo/retirado.
+| 6 | Buscar un equipo inexistente | Se muestra una respuesta controlada, sin error de aplicación.
+| 7 | Cerrar y volver a abrir | Los datos se conservan en la base de datos.
+
+<br>
+
+~~~
+1. A continuación, se observará un vídeo donde se pone a prueba una de las funciones de la aplicación, la cual es insertar datos en ella sin la necesidad de ir a la base de datos. Ahora bien, nuestro registro va a ser "PC-001", la cual deberemos de tomar en cuenta si esta se guarda correctamente.
+~~~
+
+<video width="100%" controls>
+  <source src="./demostracion_funcional/crear_activo_pc_001.mp4" type="video/mp4">
+</video>
+
+<br>
+
+---
+
+<br>
+
+~~~
+2. No obstante, en el siguiente vídeo se observará si una de las funciones que fue incorporada desde la base de datos, también funcionará desde la aplicación sin que esta muestre errores o no dé respuestas, la cual será que el sistema deberá de bloquear un registro duplicado en el que un campo tenga la opción de "Is unique", ya que esto permitirá que no hayan registros duplicados. Sin embargo, también se deberá de mostrar un mensaje que le indique al usuario que no puede realizar dicha acción porque ya hay un registro anterior igual a ese. Y para eso, se tomaré como ejemplo el registro "PC-001". 
+~~~
+
+<video width="100%" controls>
+  <source src="./demostracion_funcional/crear_nuevamente_pc_001.mp4" type="video/mp4">
+</video>
+
+<br>
+
+---
+
+<br>
+
+~~~
+3. Por otra parte, ¿qué pasaría si se intenta guardar un equipo sin nombre? ¿Fallará? ¿Se guardará correctamente? Bueno, ya la respuesta es que el equipo no se podrá guardar sin el nombre, esto debido a que durante la creación de la tabla "equipos", a algunos campos se les puso "not null", lo que significa que el registro que vaya a estar en ese campo no podrá ir vacío por ninguna circunstancia. 
+~~~
+
+<video width="100%" controls>
+  <source src="./demostracion_funcional/guardar_equipo_sin_nombre.mp4" type="video/mp4">
+</video>
+
+<br>
+
+---
+
+<br>
+
+~~~
+4. En el siguiente vídeo, se pondrá a prueba una de las funciones de la aplicación, la cual es actualizar datos en ella sin la necesidad de ir a la base de datos. Para este caso, se eligió el idEquipo = 24, donde se deberá cambiar "Mateo Silva" por otro responsable del equipo.
+~~~
+
+<video width="100%" controls>
+  <source src="./demostracion_funcional/modificar_responsable.mp4" type="video/mp4">
+</video>
+
+<br>
+
+---
+
+<br>
+
+~~~
+5. Sin embargo, ¿qué sucederá cuando un equipo cuando se le etiquete como inactivo o retirado? ¿Desaparecerá de todos los registros? ¿Se mantendrá normal junto a todos los demás? Bueno, en el siguiente vídeo se podrá observar lo qué pasa cuando un dispositivo está inactivo o retirado.
+~~~
+
+<video width="100%" controls>
+  <source src="./demostracion_funcional/inactivar_equipo.mp4" type="video/mp4">
+</video>
+
+<br>
+
+---
+
+<br>
+
+~~~
+6. En el siguiente vídeo, se pondrá a prueba lo qué pasará cuando se intenta consultar por un equipo inexistente, esta función se puede hacer desde la base de datos; sin embargo, ¿funcionará dentro de la aplicación? ¿O simplemente responderá con errores de aplicación? Asimismo, para esta situación, se eligió como ejemplo un modelo de HP, la cual es "HP OMEN 35L GAMING DESKTOP", donde esté equipo no está registrado en la base de datos.
+~~~
+
+<video width="100%" controls>
+  <source src="./demostracion_funcional/buscar_equipo_inexistente.mp4" type="video/mp4">
+</video>
+
+<br>
+
+---
+
+<br>
+
+~~~
+7. Por último, pero no menos importante, ¿todos los datos hechos desde la aplicación se guadarán en la base de datos? En el siguiente vídeo se observará lo que pasará cuando se cierra la aplicación y luego se vuelve abrir esta. En caso de que sí se guarden, demuestra que ya aplicación funciona en tiempo real con la base de datos. En caso contrario, se deberá de arreglar eso de la aplicación.
+~~~
+
+<video width="100%" controls>
+  <source src="./demostracion_funcional/cerrar_y_volver_abrir.mp4" type="video/mp4">
+</video>

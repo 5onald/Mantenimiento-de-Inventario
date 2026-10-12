@@ -102,8 +102,8 @@
                     <input id="modelo" name="Modelo" type="text">
                 </div>
                 <div class="campo-formulario">
-                    <label for="codigoActivo">Código Activo</label>
-                    <input id="codigoActivo" name="CodigoActivo" type="text">
+                    <label for="codigoActivo">Código Activo *</label>
+                    <input id="codigoActivo" name="CodigoActivo" type="text" required>
                 </div>
                 <div class="campo-formulario">
                     <label for="numeroSerie">Número de Serie</label>
@@ -114,8 +114,8 @@
                     <input id="fechaRegistro" name="FechaRegistro" type="date">
                 </div>
                 <div class="campo-formulario">
-                    <label for="estado">Estado</label>
-                    <select id="estado" name="idEstado">
+                    <label for="estado">Estado *</label>
+                    <select id="estado" name="idEstado" required>
                         <option value="">Sin estado</option>
                     </select>
                 </div>
@@ -136,8 +136,8 @@
                     <textarea id="observaciones" name="Observaciones" rows="2"></textarea>
                 </div>
                 <div class="campo-formulario">
-                    <label for="activo">Activo</label>
-                    <select id="activo" name="Activo">
+                    <label for="activo">Activo *</label>
+                    <select id="activo" name="Activo" required>
                         <option value="true">Sí</option>
                         <option value="false">No</option>
                     </select>
