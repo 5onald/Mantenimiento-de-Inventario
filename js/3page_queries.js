@@ -5,6 +5,7 @@ const filtroMarca = document.getElementById("filtroMarca");
 const filtroEstado = document.getElementById("filtroEstado");
 const equipos = [];
 
+// Bloque 1
 function normalizarTexto(valor) {
     return String(valor ?? "")
         .normalize("NFD")
@@ -12,12 +13,14 @@ function normalizarTexto(valor) {
         .toLocaleLowerCase();
 }
 
+// Bloque 2
 function crearCelda(fila, valor) {
     const celda = document.createElement("td");
     celda.textContent = String(valor ?? "");
     fila.appendChild(celda);
 }
 
+// Bloque 3
 function mostrarEquipos() {
     const busqueda = normalizarTexto(buscarEquipo.value.trim());
     const marcaSeleccionada = filtroMarca.value;
@@ -75,6 +78,7 @@ function mostrarEquipos() {
         : "No se encontraron equipos con esos criterios.";
 }
 
+// Bloque 4
 function cargarOpciones(select, opciones, idCampo, textoCampo) {
     opciones.forEach(opcion => {
         const elemento = document.createElement("option");
@@ -84,6 +88,7 @@ function cargarOpciones(select, opciones, idCampo, textoCampo) {
     });
 }
 
+// Bloque 5
 async function cargarEquipos() {
     const { data, error } = await supabaseClient
         .from("equipos")
@@ -111,6 +116,7 @@ async function cargarEquipos() {
     return null;
 }
 
+// Bloque 6
 async function cargarFiltros() {
     const [marcasResultado, estadosResultado] = await Promise.all([
         supabaseClient.from("marcas").select("idMarcas, Marca").order("Marca"),
@@ -135,6 +141,7 @@ async function cargarFiltros() {
     return errores;
 }
 
+// Bloque 7
 buscarEquipo.addEventListener("input", mostrarEquipos);
 filtroMarca.addEventListener("change", mostrarEquipos);
 filtroEstado.addEventListener("change", mostrarEquipos);
@@ -145,6 +152,7 @@ document.getElementById("limpiarFiltros").addEventListener("click", () => {
     mostrarEquipos();
 });
 
+// Bloque 8
 async function iniciarConsulta() {
     const [erroresFiltros, errorEquipos] = await Promise.all([
         cargarFiltros(),
@@ -160,8 +168,10 @@ async function iniciarConsulta() {
     }
 }
 
+// Bloque 9
 iniciarConsulta();
 
+// Bloque 10
 supabaseClient
     .channel("equipos-cambios")
     .on(

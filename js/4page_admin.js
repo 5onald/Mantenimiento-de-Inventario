@@ -12,6 +12,7 @@ let equipoEnEdicion = null;
 
 verificarSesionAdministrador();
 
+// Bloque 1
 document.getElementById("cerrarSesion").addEventListener("click", async evento => {
     evento.preventDefault();
     try {
@@ -28,6 +29,7 @@ document.getElementById("cerrarSesion").addEventListener("click", async evento =
     }
 });
 
+// Bloque 2
 async function verificarSesionAdministrador() {
     try {
         const { data, error } = await supabaseClient.auth.getUser();
@@ -49,6 +51,7 @@ async function verificarSesionAdministrador() {
     }
 }
 
+// Bloque 3
 function normalizarTexto(valor) {
     return String(valor ?? "")
         .normalize("NFD")
@@ -56,12 +59,14 @@ function normalizarTexto(valor) {
         .toLocaleLowerCase();
 }
 
+// Bloque 4
 function agregarCelda(fila, valor) {
     const celda = document.createElement("td");
     celda.textContent = String(valor ?? "");
     fila.appendChild(celda);
 }
 
+// Bloque 5
 function mostrarEquipos() {
     const busqueda = normalizarTexto(buscarEquipo.value.trim());
     const marcaSeleccionada = filtroMarca.value;
@@ -138,6 +143,7 @@ function mostrarEquipos() {
         : "No se encontraron equipos con esos criterios.";
 }
 
+// Bloque 6
 function cargarOpciones(select, opciones, idCampo, textoCampo, textoInicial) {
     select.replaceChildren();
     const inicial = document.createElement("option");
@@ -153,6 +159,7 @@ function cargarOpciones(select, opciones, idCampo, textoCampo, textoInicial) {
     });
 }
 
+// Bloque 7
 async function cargarEquipos() {
     const { data, error } = await supabaseClient
         .from("equipos")
@@ -180,6 +187,7 @@ async function cargarEquipos() {
     return true;
 }
 
+// Bloque 8
 async function cargarOpcionesFiltro() {
     const [marcasResultado, estadosResultado] = await Promise.all([
         supabaseClient.from("marcas").select("idMarcas, Marca").order("Marca"),
@@ -221,6 +229,7 @@ async function cargarOpcionesFiltro() {
     return errores;
 }
 
+// Bloque 9
 function seleccionarRelacion(select, id, texto) {
     if (id && !Array.from(select.options).some(opcion => opcion.value === String(id))) {
         const opcion = document.createElement("option");
@@ -231,6 +240,7 @@ function seleccionarRelacion(select, id, texto) {
     select.value = id ? String(id) : "";
 }
 
+// Bloque 10
 function abrirFormulario(equipo = null) {
     equipoEnEdicion = equipo;
     formularioEquipo.reset();
@@ -266,6 +276,7 @@ function abrirFormulario(equipo = null) {
     dialogoEquipo.showModal();
 }
 
+// Bloque 11
 function crearDatosEquipo() {
     const datos = new FormData(formularioEquipo);
     return {
@@ -285,6 +296,7 @@ function crearDatosEquipo() {
     };
 }
 
+// Bloque 12
 async function guardarEquipo(evento) {
     evento.preventDefault();
     const botonGuardar = document.getElementById("guardarEquipo");
@@ -316,6 +328,7 @@ async function guardarEquipo(evento) {
     botonGuardar.disabled = false;
 }
 
+// Bloque 13
 async function eliminarEquipo(equipo) {
     const nombre = equipo.Nombre ?? `#${equipo.idEquipo}`;
     if (!window.confirm(`¿Seguro que deseas eliminar el equipo "${nombre}"? Esta acción no se puede deshacer.`)) {
@@ -338,6 +351,7 @@ async function eliminarEquipo(equipo) {
     await cargarEquipos();
 }
 
+// Bloque 14
 async function iniciarAdministracion() {
     const [erroresFiltros, equiposCargados] = await Promise.all([
         cargarOpcionesFiltro(),
@@ -352,6 +366,7 @@ async function iniciarAdministracion() {
     }
 }
 
+// Bloque 15
 buscarEquipo.addEventListener("input", mostrarEquipos);
 filtroMarca.addEventListener("change", mostrarEquipos);
 filtroEstado.addEventListener("change", mostrarEquipos);
@@ -366,6 +381,7 @@ document.getElementById("cerrarDialogo").addEventListener("click", () => dialogo
 document.getElementById("cancelarEquipo").addEventListener("click", () => dialogoEquipo.close());
 formularioEquipo.addEventListener("submit", guardarEquipo);
 
+// Bloque 16
 function suscribirCambios() {
     supabaseClient
         .channel("admin-equipos-cambios")

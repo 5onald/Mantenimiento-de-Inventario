@@ -2,6 +2,7 @@ const ADMIN_EMAIL = 'alejandrosolanor@gmail.com';
 const formularioLogin = document.getElementById('login-form');
 const mensajeError = document.getElementById('mensaje-error');
 
+// Bloque 1
 formularioLogin.addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('email').value.trim();
@@ -10,6 +11,7 @@ formularioLogin.addEventListener('submit', async function (e) {
     boton.disabled = true;
     mensajeError.textContent = '';
 
+    // Bloque 1.1
     let data;
     try {
         const resultado = await supabaseClient.auth.signInWithPassword({ email, password });
@@ -27,6 +29,7 @@ formularioLogin.addEventListener('submit', async function (e) {
         return;
     }
 
+    // Bloque 1.2
     if (data.user.email?.toLowerCase() !== ADMIN_EMAIL) {
         try {
             const { error: signOutError } = await supabaseClient.auth.signOut();
@@ -41,9 +44,11 @@ formularioLogin.addEventListener('submit', async function (e) {
         return;
     }
 
+    // Bloque 1.3
     window.location.href = '../html/4page_admin.html';
 });
 
+// Bloque 2
 document.getElementById('button-next-section').onclick = function () {
     window.location.href = '../html/2page_homepage.html';
 };
